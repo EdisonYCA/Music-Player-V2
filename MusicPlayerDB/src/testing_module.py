@@ -1,3 +1,4 @@
 from artist_v2 import Artist
 
-jcole = Artist("Kanye West")
+J_Cole = Artist("J.Cole")
+J_Cole.add_album("mane")
