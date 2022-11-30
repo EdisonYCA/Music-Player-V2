@@ -26,10 +26,16 @@ def store_song(artist_name, song_name):
     song = open(artist_path, 'w')
 
 
-def store_album(artist_name, album_name, songs):
-    pass
+def store_album(artist_name, album_name):
     # fetch the artists location in the database
+    artist_path = Path(ARTISTS_IN_DATABASE_DIR) / artist_name / 'Albums' / album_name
     # create folder in artists location with album_name
+    os.makedir(artist_path)
     # create files in album_name with song names
 
 
+def locate_artist(artist_name):
+    location = os.path.join(ARTISTS_IN_DATABASE_DIR, artist_name)
+    if os.path.isdir(location):
+        return location
+    return False
