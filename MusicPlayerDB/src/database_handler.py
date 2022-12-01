@@ -23,15 +23,26 @@ def store_song(artist_name, song_name):
     # fetch the artists location in the database and append song_name
     artist_path = Path(ARTISTS_IN_DATABASE_DIR) / artist_name / 'Songs' / song_name
     # store the song in the song folder for that artist
-    song = open(artist_path, 'w')
+    open(artist_path, 'w')
 
 
-def store_album(artist_name, album_name):
-    # fetch the artists location in the database
-    artist_path = Path(ARTISTS_IN_DATABASE_DIR) / artist_name / 'Albums' / album_name
-    # create folder in artists location with album_name
-    os.makedir(artist_path)
-    # create files in album_name with song names
+def store_album(artist_name, album_name, songs):
+    # check for song count before storing album
+    if len(songs) < 2:
+        print("In order to create an album, the album must include at-least 2 songs.")
+    else:
+        # fetch the artists location in the database
+        artist_path = Path(ARTISTS_IN_DATABASE_DIR) / artist_name / 'Albums' / album_name
+        # create folder in artists location with album_name
+        try:
+            os.mkdir(artist_path)
+        except FileExistsError:  # restriction: artist cannot have multiple albums with the same name
+            print(f"{album_name} already exists in {artist_name}'s profile.")
+        # store songs in album
+        for song in songs:
+            store_song(artist_name, song)
+            song += ".txt"
+            open(artist_path / song, 'w')
 
 
 def locate_artist(artist_name):
