@@ -42,7 +42,8 @@ class Artist:
             format_song_name = songs.split(".txt")
             song_names.append(format_song_name[0].title())
 
-        print(*song_names, sep=", ")
+        return song_names
+        # print(*song_names, sep=", ")
 
     def get_name(self):
         """Returns artists name"""
@@ -56,7 +57,7 @@ class Artist:
         """add song to artists current song storage"""
         db.store_song(self.name, song)
 
-    def __repr__(self):
+    def __repr__(self):  # fix string representation of Artists
         """Represent artist object as a string"""
         return f"Artist: {self.name.title()}\n" \
                f"Albums: {self.get_albums()}\n" \
