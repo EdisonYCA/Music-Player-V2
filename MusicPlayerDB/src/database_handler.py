@@ -15,11 +15,11 @@ def store_artist(artist_name):
         os.makedirs(albums_dir)
         os.makedirs(songs_dir)
     except FileExistsError:
-        print("'" + artist_name + "'" + " is already stored in the database.")
+        print("I'm sorry, '" + artist_name + "'" + " is already stored in the database.\nTerminating process..")
+        exit()
 
 
 def store_song(artist_name, song_name):
-    song_name += ".txt"
     # fetch the artists location in the database and append song_name
     artist_path = Path(ARTISTS_IN_DATABASE_DIR) / artist_name / 'Songs' / song_name
     # store the song in the song folder for that artist
@@ -41,7 +41,6 @@ def store_album(artist_name, album_name, songs):
         # store songs in album
         for song in songs:
             store_song(artist_name, song)
-            song += ".txt"
             open(artist_path / song, 'w')
 
 
