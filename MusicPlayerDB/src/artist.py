@@ -48,15 +48,16 @@ class Artist:
         """Returns artists name"""
         return self.name.title()
 
-    def add_album(self, album):
+    def add_album(self, album, songs):
         """add album to artists current album storage"""
-        db.store_album(self.name, album)
+        db.store_album(self.name, album, songs)
 
     def add_song(self, song):
         """add song to artists current song storage"""
         db.store_song(self.name, song)
 
-    # def __repr__(self):
-    #     """Represent artist object as a string"""
-    #     return f"Artist: {self.name.title()}\n" \
-    #            f"Albums: {self.get_albums()}\n"
+    def __repr__(self):
+        """Represent artist object as a string"""
+        return f"Artist: {self.name.title()}\n" \
+               f"Albums: {self.get_albums()}\n" \
+               f"Songs: {self.get_songs()}"
