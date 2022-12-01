@@ -1,19 +1,19 @@
-from .artist import Artist
-from .album import Album
-from .song import Song
+from artist import Artist
+from album import Album
+from song import Song
 
 
 def ui():
     run_program = True
 
     while run_program:
-        # ask the user to enter an artist name
-        print("Welcome to Music Player V1\n"
-              "Let's begin by adding an artist!")
-        artist_name = input("Enter the artist name -> ")
+        # ask the user to enter their artist name
+        print("Welcome to Music Player V2\n"
+              "Let's begin by adding your profile to our Artist database!")
+        artist_name = input("Enter your artist name -> ")
 
-        # ask the user to enter a song or album for the artist
-        print(f"\nWould you like to enter a song, or a album for {artist_name}?\n"
+        # ask the artist to enter a song or album
+        print(f"\n{artist_name}, would you like to enter a song, or a album to your profile?\n"
               "1. Song\n"
               "2. Album\n"
               "3. None")
@@ -44,12 +44,12 @@ def ui():
         elif request.lower() == "2":
             print(f"\nLets add an album to {artist_name}'s profile.")
 
-            artist.add_album(album_request())
+            # artist.add_album(album_request())
             print("\nOperation successful!\n")
             print(artist)
 
         else:
-            print("\nOperation successful!\n")
+            print("Thank you!")
             print(artist)
 
         run_program = False
@@ -89,3 +89,6 @@ def song_request():
 
     user_song = Song(song_name, song_length)
     return user_song
+
+if __name__ == "__main__":
+    ui()
