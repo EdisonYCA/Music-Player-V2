@@ -16,6 +16,7 @@ class Artist:
         # Locate artist in database
         albums_location = os.path.join(db.locate_artist(self.name), 'Albums')
 
+        albums_list = []
         # Iterate through album names and print them
         song_count = 0
         for albums in os.listdir(albums_location):
@@ -25,11 +26,14 @@ class Artist:
 
             # format output
             if song_count == 1:
-                print(f"{album_name.title()}: {song_count} song")
+                albums_list.append(album_name.title())
+                albums_list.append(str(song_count) + " song")
                 song_count = 0
             else:
-                print(f"{album_name.title()}: {song_count} songs")
+                albums_list.append(album_name.title())
+                albums_list.append(str(song_count) + " songs")
                 song_count = 0
+        return albums_list
 
     def get_songs(self):
         """Returns an artists songs"""
@@ -43,7 +47,7 @@ class Artist:
             song_names.append(format_song_name[0].title())
 
         return song_names
-        # print(*song_names, sep=", ")
+
 
     def get_name(self):
         """Returns artists name"""
@@ -59,6 +63,9 @@ class Artist:
 
     def __repr__(self):  # fix string representation of Artists
         """Represent artist object as a string"""
+        songs = self.get_songs()
+        albums = self.get_albums()
         return f"Artist: {self.name.title()}\n" \
-               f"Albums: {self.get_albums()}\n" \
-               f"Songs: {self.get_songs()}"
+               f"Albums: {' : '.join(albums)}\n" \
+               f"Songs: {', '.join(songs)}"
+
