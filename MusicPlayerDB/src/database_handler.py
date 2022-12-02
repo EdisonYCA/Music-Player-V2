@@ -20,6 +20,7 @@ def store_artist(artist_name):
 
 
 def store_song(artist_name, song_name):
+    song_name += ".txt"
     # fetch the artists location in the database and append song_name
     artist_path = Path(ARTISTS_IN_DATABASE_DIR) / artist_name / 'Songs' / song_name
     # store the song in the song folder for that artist
@@ -40,7 +41,7 @@ def store_album(artist_name, album_name, songs):
             print(f"{album_name} already exists in {artist_name}'s profile.")
         # store songs in album
         for song in songs:
-            store_song(artist_name, song)
+            song += ".txt"
             open(artist_path / song, 'w')
 
 
